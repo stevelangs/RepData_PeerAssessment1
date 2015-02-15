@@ -14,7 +14,7 @@ daysums <- aggregate(activity$steps, list(activity$date), sum)
 hist(daysums$x, breaks=seq(from=0, to=22000, by=500))
 ```
 
-![](PA1_files/figure-html/unnamed-chunk-2-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
 
 ```r
 totalmean <- sprintf("%6.2f", mean(daysums$x, na.rm=TRUE))
@@ -31,7 +31,7 @@ intavgs <- aggregate(activity_nona$steps, list(activity_nona$interval), mean)
 plot(intavgs$Group.1, intavgs$x, type="l")
 ```
 
-![](PA1_files/figure-html/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 ```r
 maxrow <- which.max(intavgs$x)
@@ -65,7 +65,7 @@ hist(daysums$x, col=rgb(1,0,0,0.5), breaks=seq(from=0, to=22000, by=500))
 hist(daysums_replace_na$x, col=rgb(0,0,1,0.5), breaks=seq(from=0, to=22000, by=500), add=T)
 ```
 
-![](PA1_files/figure-html/unnamed-chunk-5-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
 
 ```r
 totalmean_replace_na <- sprintf("%6.2f", mean(daysums_replace_na$x, na.rm=TRUE))
@@ -99,5 +99,5 @@ plot(intavgs_weekday$Group.1, intavgs_weekday$x, col=rgb(1,0,0,0.5), type="l")
 lines(intavgs_weekend$Group.1, intavgs_weekend$x, col=rgb(0,0,1,0.5))
 ```
 
-![](PA1_files/figure-html/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
