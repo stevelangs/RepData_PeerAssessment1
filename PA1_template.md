@@ -11,7 +11,7 @@ activity <- read.csv("activity.csv")
 
 ```r
 daysums <- aggregate(activity$steps, list(activity$date), sum)
-hist(daysums$x, breaks=seq(from=0, to=22000, by=500))
+hist(daysums$x, breaks=seq(from=0, to=22000, by=500), main="Histogram: Number of steps/day", xlab="Number of Steps", ylab="Number of days")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
@@ -28,7 +28,7 @@ The median steps per day is 10765.00
 ```r
 activity_nona <- na.omit(activity)
 intavgs <- aggregate(activity_nona$steps, list(activity_nona$interval), mean)
-plot(intavgs$Group.1, intavgs$x, type="l")
+plot(intavgs$Group.1, intavgs$x, type="l", main="Time series: Number of steps/5-minute interval", xlab="Interval", ylab="Number of Steps (mean over all days)")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
@@ -59,9 +59,9 @@ for(n in which(is.na(activity$steps))) {
 # Recalculate the histograms with the NA replacement strategy in place.
 daysums_replace_na <- aggregate(activity_replace_na$steps, list(activity_replace_na$date), sum)
 par(mfrow=c(3,1))
-hist(daysums$x, col=rgb(1,0,0,0.5), breaks=seq(from=0, to=22000, by=500))
-hist(daysums_replace_na$x, col=rgb(0,0,1,0.5), breaks=seq(from=0, to=22000, by=500))
-hist(daysums$x, col=rgb(1,0,0,0.5), breaks=seq(from=0, to=22000, by=500))
+hist(daysums$x, col=rgb(1,0,0,0.5), breaks=seq(from=0, to=22000, by=500), main="Histogram: Number of steps/day (missing values ignored)", xlab="Number of Steps", ylab="Number of days")
+hist(daysums_replace_na$x, col=rgb(0,0,1,0.5), breaks=seq(from=0, to=22000, by=500), main="Histogram: Number of steps/day (missing values replaced)", xlab="Number of Steps", ylab="Number of days")
+hist(daysums$x, col=rgb(1,0,0,0.5), breaks=seq(from=0, to=22000, by=500), main="Histogram: Number of steps/day (comparison, purple=overlap)", xlab="Number of Steps", ylab="Number of days")
 hist(daysums_replace_na$x, col=rgb(0,0,1,0.5), breaks=seq(from=0, to=22000, by=500), add=T)
 ```
 
@@ -93,9 +93,9 @@ intavgs_weekday <- aggregate(activity_weekday$steps, list(activity_weekday$inter
 intavgs_weekend <- aggregate(activity_weekend$steps, list(activity_weekend$interval), mean)
 # Show each time-series plot seperately, and then a combined plot
 par(mfrow=c(3,1))
-plot(intavgs_weekday$Group.1, intavgs_weekday$x, col=rgb(1,0,0,0.5), type="l")
-plot(intavgs_weekend$Group.1, intavgs_weekend$x, col=rgb(0,0,1,0.5), type="l")
-plot(intavgs_weekday$Group.1, intavgs_weekday$x, col=rgb(1,0,0,0.5), type="l")
+plot(intavgs_weekday$Group.1, intavgs_weekday$x, col=rgb(1,0,0,0.5), type="l", main="Time series: Number of steps/5-minute interval (weekdays)", xlab="Interval", ylab="Number of Steps (mean over weekdays)")
+plot(intavgs_weekend$Group.1, intavgs_weekend$x, col=rgb(0,0,1,0.5), type="l", main="Time series: Number of steps/5-minute interval (weekend)", xlab="Interval", ylab="Number of Steps (mean over weekend days)")
+plot(intavgs_weekday$Group.1, intavgs_weekday$x, col=rgb(1,0,0,0.5), type="l", main="Time series: Number of steps/5-minute interval (comparison)", xlab="Interval", ylab="Number of Steps (weekdays=red, weekend=blue)")
 lines(intavgs_weekend$Group.1, intavgs_weekend$x, col=rgb(0,0,1,0.5))
 ```
 
